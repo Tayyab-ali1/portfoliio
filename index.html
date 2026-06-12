@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tayyab Ali — Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E14;
+    --surface:#121821;
+    --text:#E6E8EB;
+    --muted:#8B95A7;
+    --accent:#5FE3C0;
+    --accent2:#7AA2F7;
+    --border:#222C3A;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:var(--accent);text-decoration:none;}
+  a:hover{color:var(--accent2);}
+
+  .navbar{background:rgba(10,14,20,0.85)!important;backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
+  .navbar-brand{font-family:'JetBrains Mono',monospace;font-weight:500;color:var(--text)!important;}
+  .navbar-brand span{color:var(--accent);}
+  .nav-link{color:var(--muted)!important;font-family:'JetBrains Mono',monospace;font-size:0.85rem;transition:color .2s;}
+  .nav-link:hover{color:var(--accent)!important;}
+
+  .hero{min-height:90vh;display:flex;align-items:center;padding:100px 0 60px;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle, rgba(95,227,192,0.08), transparent 70%);pointer-events:none;}
+  .terminal{background:var(--surface);border:1px solid var(--border);border-radius:10px;max-width:620px;box-shadow:0 20px 60px -20px rgba(0,0,0,0.6);}
+  .terminal-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--border);}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .dot.red{background:#FF5F56;}
+  .dot.yellow{background:#FFBD2E;}
+  .dot.green{background:#27C93F;}
+  .terminal-title{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);}
+  .terminal-body{padding:24px;font-family:'JetBrains Mono',monospace;font-size:0.95rem;min-height:140px;}
+  .terminal-body .prompt{color:var(--accent2);}
+  .typed-line{display:block;overflow:hidden;white-space:nowrap;border-right:2px solid var(--accent);width:0;animation:typing 1.6s steps(40,end) forwards, blinkcaret 0.7s step-end infinite;}
+  .typed-line.l2{animation-delay:1.7s, 1.7s;}
+  .typed-line.l3{animation-delay:3.4s, 3.4s;}
+  .typed-line.l4{animation-delay:5.1s, 5.1s; border-right:none;}
+  @keyframes typing{from{width:0;}to{width:100%;}}
+  @keyframes blinkcaret{50%{border-color:transparent;}}
+
+  .hero h1{font-size:clamp(2.4rem, 6vw, 4rem);font-weight:700;line-height:1.1;letter-spacing:-0.02em;}
+  .hero .role{color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:1rem;}
+  .hero p.lead{color:var(--muted);font-size:1.05rem;}
+
+  .btn-accent{font-family:'JetBrains Mono',monospace;font-size:0.85rem;padding:11px 22px;border-radius:6px;background:var(--accent);color:#0A0E14;border:1px solid var(--accent);font-weight:500;transition:transform .2s, background .2s;}
+  .btn-accent:hover{background:#7CF0D2;color:#0A0E14;transform:translateY(-2px);}
+  .btn-ghost{font-family:'JetBrains Mono',monospace;font-size:0.85rem;padding:11px 22px;border-radius:6px;border:1px solid var(--border);color:var(--text);transition:all .2s;}
+  .btn-ghost:hover{border-color:var(--accent2);color:var(--accent2);transform:translateY(-2px);}
+
+  section{padding:80px 0;border-top:1px solid var(--border);}
+  .eyebrow{font-family:'JetBrains Mono',monospace;color:var(--accent2);font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;}
+  section h2{font-size:1.9rem;margin-bottom:36px;}
+
+  .skill-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;height:100%;transition:transform .25s, border-color .25s;}
+  .skill-card:hover{transform:translateY(-4px);border-color:var(--accent);}
+  .skill-card h3{font-size:0.95rem;margin-bottom:10px;color:var(--text);}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--accent);background:rgba(95,227,192,0.08);border:1px solid rgba(95,227,192,0.2);padding:4px 9px;border-radius:5px;display:inline-block;margin:0 6px 6px 0;}
+
+  .timeline{position:relative;padding-left:28px;}
+  .timeline::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--border);}
+  .tl-item{position:relative;}
+  .tl-item::before{content:'';position:absolute;left:-28px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);animation:pulse 2s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(95,227,192,0.4);}70%{box-shadow:0 0 0 8px rgba(95,227,192,0);}100%{box-shadow:0 0 0 0 rgba(95,227,192,0);}}
+  .tl-date{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:4px;}
+  .tl-item h3{font-size:1.1rem;margin-bottom:2px;}
+  .tl-item .org{color:var(--accent2);font-size:0.9rem;margin-bottom:10px;}
+  .tl-item p{color:var(--muted);font-size:0.95rem;max-width:640px;}
+
+  .project-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:28px;transition:border-color .25s, transform .25s;}
+  .project-card:hover{border-color:var(--accent2);transform:translateY(-4px);}
+  .project-card h3{font-size:1.2rem;margin-bottom:8px;}
+  .project-card .date{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:0.78rem;margin-bottom:14px;}
+  .project-card p{color:var(--muted);margin-bottom:18px;}
+  .project-card .stack{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--accent);margin-bottom:18px;}
+  .project-card a.link{font-family:'JetBrains Mono',monospace;font-size:0.85rem;border-bottom:1px solid var(--accent);padding-bottom:2px;}
+
+  .edu-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:28px;transition:transform .25s, border-color .25s;}
+  .edu-card:hover{transform:translateY(-4px);border-color:var(--accent);}
+  .edu-card h3{font-size:1.1rem;margin-bottom:4px;}
+  .edu-card .org{color:var(--accent2);font-size:0.9rem;margin-bottom:4px;}
+  .edu-card .date{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:0.78rem;margin-bottom:14px;}
+  .edu-card p{color:var(--muted);}
+
+  .contact-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;text-align:center;transition:border-color .25s, transform .25s;display:block;height:100%;}
+  .contact-card:hover{border-color:var(--accent);transform:translateY(-4px);}
+  .contact-card .label{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;}
+  .contact-card .value{color:var(--text);font-size:0.95rem;word-break:break-word;}
+
+  footer{text-align:center;padding:36px 0;font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--muted);border-top:1px solid var(--border);}
+
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">tayyab<span>.dev</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" style="filter:invert(1);">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="nav">
+      <ul class="navbar-nav gap-lg-4 text-center">
+        <li class="nav-item"><a class="nav-link" href="#about">about</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#training">training</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 order-lg-2">
+        <div class="terminal animate__animated animate__fadeInRight">
+          <div class="terminal-bar">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span class="terminal-title">tayyab@karachi: ~</span>
+          </div>
+          <div class="terminal-body">
+            <span class="typed-line l1"><span class="prompt">$</span> whoami</span>
+            <span class="typed-line l2">Tayyab Ali — Full Stack Developer (MERN)</span>
+            <span class="typed-line l3"><span class="prompt">$</span> cat status.txt</span>
+            <span class="typed-line l4">Building with React, Node.js, MongoDB &amp; Tailwind.</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 order-lg-1 animate__animated animate__fadeInUp">
+        <div class="role mb-3">// full stack developer · mern</div>
+        <h1 class="mb-3">I build full-stack web apps<br>that actually ship.</h1>
+        <p class="lead">BS Computer Science student from Karachi, focused on React, Node.js, MongoDB and Tailwind CSS — with hands-on experience building real applications and a growing interest in Generative AI.</p>
+        <div class="d-flex gap-3 flex-wrap mt-4">
+          <a class="btn-accent" href="#projects">View projects</a>
+          <a class="btn-ghost" href="#contact">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container reveal animate__fadeInUp">
+    <div class="eyebrow">// about</div>
+    <h2>Summary</h2>
+    <p style="color:var(--muted);max-width:680px;">
+      Motivated and passionate BS Computer Science student with skills in MERN Stack development, React, Node.js, MongoDB, and Tailwind CSS. Currently learning Generative AI at Governor House Sindh and building modern full-stack web applications with a focus on responsive design, problem-solving, and real-world projects.
+    </p>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="eyebrow">// skills</div>
+    <h2>What I work with</h2>
+    <div class="row g-3">
+      <div class="col-md-3 col-6 reveal animate__fadeInUp">
+        <div class="skill-card">
+          <h3>Technical</h3>
+          <span class="tag">JavaScript</span>
+          <span class="tag">React.js</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">MongoDB</span>
+          <span class="tag">Tailwind CSS</span>
+          <span class="tag">Git & GitHub</span>
+        </div>
+      </div>
+      <div class="col-md-3 col-6 reveal animate__fadeInUp" style="animation-delay:.1s;">
+        <div class="skill-card">
+          <h3>Tools</h3>
+          <span class="tag">VS Code</span>
+        </div>
+      </div>
+      <div class="col-md-3 col-6 reveal animate__fadeInUp" style="animation-delay:.2s;">
+        <div class="skill-card">
+          <h3>Soft Skills</h3>
+          <span class="tag">Leadership</span>
+          <span class="tag">Communication</span>
+          <span class="tag">Problem Solving</span>
+        </div>
+      </div>
+      <div class="col-md-3 col-6 reveal animate__fadeInUp" style="animation-delay:.3s;">
+        <div class="skill-card">
+          <h3>Languages</h3>
+          <span class="tag">English</span>
+          <span class="tag">Urdu</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="training">
+  <div class="container">
+    <div class="eyebrow">// training</div>
+    <h2>Currently learning</h2>
+    <div class="timeline">
+      <div class="tl-item reveal animate__fadeInLeft">
+        <div class="tl-date">Quarter 4</div>
+        <h3>Generative AI Program</h3>
+        <div class="org">Governor House Sindh</div>
+        <p>Currently enrolled in Quarter 4 of the Generative AI training program at Governor House Sindh, building skills in AI tools and techniques alongside MERN stack development.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="eyebrow">// projects</div>
+    <h2>Featured work</h2>
+    <div class="row">
+      <div class="col-md-8 reveal animate__fadeInUp">
+        <div class="project-card">
+          <div class="date">Sep 2025</div>
+          <h3>LMS Website</h3>
+          <p>A Learning Management System enabling students and instructors to manage online learning activities efficiently — including course creation, enrollment, and structured learning content delivery.</p>
+          <div class="stack">stack: MERN</div>
+          <a class="link" href="https://frontend-seven-zeta-59.vercel.app/" target="_blank" rel="noopener">View live project →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="container">
+    <div class="eyebrow">// education</div>
+    <h2>Education</h2>
+    <div class="row">
+      <div class="col-md-8 reveal animate__fadeInUp">
+        <div class="edu-card">
+          <h3>Bachelor of Science in Computer Science</h3>
+          <div class="org">Al Kawthar University, Main University, Karachi</div>
+          <div class="date">2026 – 2030</div>
+          <p>Focusing on core computer science concepts such as programming, data structures, databases, and software engineering. Gaining hands-on experience in MERN stack development and working on academic projects to build a strong foundation for a career in software development and AI.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="eyebrow">// contact</div>
+    <h2>Let's connect</h2>
+    <div class="row g-3">
+      <div class="col-md-3 col-6 reveal animate__fadeInUp">
+        <a class="contact-card" href="mailto:tayyabali03370@gmail.com">
+          <div class="label">Email</div>
+          <div class="value">tayyabali03370@gmail.com</div>
+        </a>
+      </div>
+      <div class="col-md-3 col-6 reveal animate__fadeInUp" style="animation-delay:.1s;">
+        <a class="contact-card" href="tel:+923370395263">
+          <div class="label">Phone</div>
+          <div class="value">+92 337 0395263</div>
+        </a>
+      </div>
+      <div class="col-md-3 col-6 reveal animate__fadeInUp" style="animation-delay:.2s;">
+        <a class="contact-card" href="https://www.linkedin.com/in/tayyab-ali-335203262" target="_blank" rel="noopener">
+          <div class="label">LinkedIn</div>
+          <div class="value">tayyab-ali</div>
+        </a>
+      </div>
+      <div class="col-md-3 col-6 reveal animate__fadeInUp" style="animation-delay:.3s;">
+        <a class="contact-card" href="https://github.com/Tayyab-ali1" target="_blank" rel="noopener">
+          <div class="label">GitHub</div>
+          <div class="value">Tayyab-ali1</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Tayyab Ali — Built with HTML, CSS, Bootstrap & a lot of coffee.
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('animate__animated');
+        entry.target.style.visibility='visible';
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.15});
+
+  document.querySelectorAll('.reveal').forEach(el=>{
+    el.style.visibility='hidden';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
